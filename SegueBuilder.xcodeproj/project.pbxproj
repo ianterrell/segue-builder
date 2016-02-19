@@ -149,7 +149,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo \"Segue Generator: Determining if generated Swift file is up-to-date.\"\n\nNATALIE_PATH=\"$PROJECT_DIR/scripts/segue-generator.swift\"\n#If you put natalie.swift on the project folder\n# NATALIE_PATH=\"$PROJECT_DIR/natalie.swift\"\n\nif [ -f $NATALIE_PATH ]; then\nBASE_PATH=\"$PROJECT_DIR/$PROJECT_NAME\"\n\nOUTPUT_PATH=\"$BASE_PATH/SegueExtensions.swift\"\n\nif [ ! -e \"$OUTPUT_PATH\" ] || [ -n \"$(find \"$BASE_PATH\" -type f -name \"*.storyboard\" -newer \"$OUTPUT_PATH\" -print -quit)\" ]; then\necho \"Segue Generator: Generated Swift is out-of-date; re-generating...\"\n\nif [ -f $OUTPUT_PATH ]; then\n/usr/bin/chflags -f nouchg \"$OUTPUT_PATH\"\nfi\n\"$NATALIE_PATH\" \"$BASE_PATH\" > \"$OUTPUT_PATH\"\n/usr/bin/chflags uchg \"$OUTPUT_PATH\"\n\necho \"Segue Generator: Done.\"\nelse\necho \"Segue Generator: Generated Swift is up-to-date; skipping re-generation.\"\nfi\nfi";
+			shellScript = "\"$PROJECT_DIR/scripts/generate.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
