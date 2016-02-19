@@ -13,7 +13,7 @@
 		D91C0DCD1C76551800A5A771 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D91C0DCC1C76551800A5A771 /* Assets.xcassets */; };
 		D91C0DD01C76551800A5A771 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D91C0DCE1C76551800A5A771 /* LaunchScreen.storyboard */; };
 		D91C0DF81C765BB900A5A771 /* SegueHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91C0DF71C765BB900A5A771 /* SegueHandler.swift */; };
-		D91C0DFA1C775E2200A5A771 /* Test.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D91C0DF91C775E2200A5A771 /* Test.storyboard */; };
+		D91C0DFD1C77776200A5A771 /* SegueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91C0DFC1C77776200A5A771 /* SegueExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +25,7 @@
 		D91C0DCF1C76551800A5A771 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D91C0DD11C76551800A5A771 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D91C0DF71C765BB900A5A771 /* SegueHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueHandler.swift; sourceTree = "<group>"; };
-		D91C0DF91C775E2200A5A771 /* Test.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Test.storyboard; sourceTree = "<group>"; };
+		D91C0DFC1C77776200A5A771 /* SegueExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,12 +60,12 @@
 			children = (
 				D91C0DC51C76551800A5A771 /* AppDelegate.swift */,
 				D91C0DC71C76551800A5A771 /* ViewControllers.swift */,
+				D91C0DFC1C77776200A5A771 /* SegueExtensions.swift */,
 				D91C0DF71C765BB900A5A771 /* SegueHandler.swift */,
 				D91C0DC91C76551800A5A771 /* Main.storyboard */,
 				D91C0DCC1C76551800A5A771 /* Assets.xcassets */,
 				D91C0DCE1C76551800A5A771 /* LaunchScreen.storyboard */,
 				D91C0DD11C76551800A5A771 /* Info.plist */,
-				D91C0DF91C775E2200A5A771 /* Test.storyboard */,
 			);
 			path = SegueBuilder;
 			sourceTree = "<group>";
@@ -77,6 +77,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D91C0DD41C76551800A5A771 /* Build configuration list for PBXNativeTarget "SegueBuilder" */;
 			buildPhases = (
+				D91C0DFB1C77760600A5A771 /* ShellScript */,
 				D91C0DBE1C76551800A5A771 /* Sources */,
 				D91C0DBF1C76551800A5A771 /* Frameworks */,
 				D91C0DC01C76551800A5A771 /* Resources */,
@@ -130,12 +131,27 @@
 			files = (
 				D91C0DD01C76551800A5A771 /* LaunchScreen.storyboard in Resources */,
 				D91C0DCD1C76551800A5A771 /* Assets.xcassets in Resources */,
-				D91C0DFA1C775E2200A5A771 /* Test.storyboard in Resources */,
 				D91C0DCB1C76551800A5A771 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D91C0DFB1C77760600A5A771 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"Segue Generator: Determining if generated Swift file is up-to-date.\"\n\nNATALIE_PATH=\"$PROJECT_DIR/scripts/segue-generator.swift\"\n#If you put natalie.swift on the project folder\n# NATALIE_PATH=\"$PROJECT_DIR/natalie.swift\"\n\nif [ -f $NATALIE_PATH ]; then\nBASE_PATH=\"$PROJECT_DIR/$PROJECT_NAME\"\n\nOUTPUT_PATH=\"$BASE_PATH/SegueExtensions.swift\"\n\nif [ ! -e \"$OUTPUT_PATH\" ] || [ -n \"$(find \"$BASE_PATH\" -type f -name \"*.storyboard\" -newer \"$OUTPUT_PATH\" -print -quit)\" ]; then\necho \"Segue Generator: Generated Swift is out-of-date; re-generating...\"\n\nif [ -f $OUTPUT_PATH ]; then\n/usr/bin/chflags -f nouchg \"$OUTPUT_PATH\"\nfi\n\"$NATALIE_PATH\" \"$BASE_PATH\" > \"$OUTPUT_PATH\"\n/usr/bin/chflags uchg \"$OUTPUT_PATH\"\n\necho \"Segue Generator: Done.\"\nelse\necho \"Segue Generator: Generated Swift is up-to-date; skipping re-generation.\"\nfi\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D91C0DBE1C76551800A5A771 /* Sources */ = {
@@ -143,6 +159,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D91C0DF81C765BB900A5A771 /* SegueHandler.swift in Sources */,
+				D91C0DFD1C77776200A5A771 /* SegueExtensions.swift in Sources */,
 				D91C0DC81C76551800A5A771 /* ViewControllers.swift in Sources */,
 				D91C0DC61C76551800A5A771 /* AppDelegate.swift in Sources */,
 			);

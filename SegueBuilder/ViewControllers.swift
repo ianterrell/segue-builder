@@ -38,24 +38,6 @@ final class A: UIViewController {
     }
 }
 
-extension A: SegueHandler {
-    enum SegueIdentifier: String {
-        case ToB
-    }
-
-    enum ToSegueDestination: SegueDestination {
-        case ToB(B)
-
-        init?(identifier: SegueIdentifier, destination: UIViewController) {
-            switch identifier {
-            case .ToB:
-                guard let b = destination as? B else { return nil }
-                self = .ToB(b)
-            }
-        }
-    }
-}
-
 final class B: UIViewController {
     var dependency: String!
 
@@ -71,25 +53,6 @@ final class B: UIViewController {
         switch segueFromStoryboardSegue(segue) {
         case .ToCViaNav(let c):
             c.prepare(dependency: "injected from b")
-        }
-    }
-}
-
-extension B: SegueHandler {
-    enum SegueIdentifier: String {
-        case ToCViaNav
-    }
-
-    enum ToSegueDestination: SegueDestination {
-        case ToCViaNav(C)
-
-        init?(identifier: SegueIdentifier, destination: UIViewController) {
-            switch identifier {
-            case .ToCViaNav:
-                guard let nav = destination as? UINavigationController else { return nil }
-                guard let c = nav.viewControllers.first as? C else { return nil }
-                self = .ToCViaNav(c)
-            }
         }
     }
 }
