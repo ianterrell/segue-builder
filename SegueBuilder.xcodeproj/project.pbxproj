@@ -13,6 +13,7 @@
 		D91C0DCD1C76551800A5A771 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D91C0DCC1C76551800A5A771 /* Assets.xcassets */; };
 		D91C0DD01C76551800A5A771 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D91C0DCE1C76551800A5A771 /* LaunchScreen.storyboard */; };
 		D91C0DF81C765BB900A5A771 /* SegueHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91C0DF71C765BB900A5A771 /* SegueHandler.swift */; };
+		D91C0DFA1C775E2200A5A771 /* Test.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D91C0DF91C775E2200A5A771 /* Test.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		D91C0DCF1C76551800A5A771 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D91C0DD11C76551800A5A771 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D91C0DF71C765BB900A5A771 /* SegueHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueHandler.swift; sourceTree = "<group>"; };
+		D91C0DF91C775E2200A5A771 /* Test.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Test.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				D91C0DCC1C76551800A5A771 /* Assets.xcassets */,
 				D91C0DCE1C76551800A5A771 /* LaunchScreen.storyboard */,
 				D91C0DD11C76551800A5A771 /* Info.plist */,
+				D91C0DF91C775E2200A5A771 /* Test.storyboard */,
 			);
 			path = SegueBuilder;
 			sourceTree = "<group>";
@@ -127,6 +130,7 @@
 			files = (
 				D91C0DD01C76551800A5A771 /* LaunchScreen.storyboard in Resources */,
 				D91C0DCD1C76551800A5A771 /* Assets.xcassets in Resources */,
+				D91C0DFA1C775E2200A5A771 /* Test.storyboard in Resources */,
 				D91C0DCB1C76551800A5A771 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,25 +8,31 @@
 
 import UIKit
 
-protocol SegueType {
-    init?(identifier: String, destination: UIViewController?)
-    var identifier: String { get }
+protocol SegueDestination {
+    typealias SegueIdentifier: RawRepresentable
+    init?(identifier: SegueIdentifier, destination: UIViewController)
 }
 
 protocol SegueHandler {
-    typealias Segue: SegueType
+    typealias SegueIdentifier: RawRepresentable
+    typealias ToSegueDestination: SegueDestination
 }
 
-extension SegueHandler where Self: UIViewController {
-    func performSegue(segue: Segue, sender: AnyObject?) {
-        performSegueWithIdentifier(segue.identifier, sender: sender)
+extension SegueHandler where Self: UIViewController, SegueIdentifier.RawValue == String, SegueIdentifier == ToSegueDestination.SegueIdentifier {
+    func performSegue(segue: SegueIdentifier, sender: AnyObject?) {
+        performSegueWithIdentifier(segue.rawValue, sender: sender)
     }
 
-    func segueFromStoryboardSegue(segue: UIStoryboardSegue) -> Segue {
-        guard let identifier = segue.identifier,
-              let segueIdentifier = Segue(identifier: identifier, destination: segue.destinationViewController)
+    func segueFromStoryboardSegue(segue: UIStoryboardSegue) -> ToSegueDestination {
+        guard let id = segue.identifier,
+              let identifier = SegueIdentifier(rawValue: id)
         else {
-            preconditionFailure("Invalid segue: \(segue.identifier).")
+            preconditionFailure("Invalid segue identifier: \(segue.identifier).")
+        }
+
+        guard let segueIdentifier = ToSegueDestination(identifier: identifier, destination: segue.destinationViewController)
+        else {
+            preconditionFailure("Wrong type for segue '\(id)': \(segue.destinationViewController.dynamicType).")
         }
         return segueIdentifier
     }

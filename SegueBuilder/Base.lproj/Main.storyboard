@@ -78,7 +78,7 @@
                                 <rect key="frame" x="279" y="285" width="43" height="30"/>
                                 <state key="normal" title="Modal"/>
                                 <connections>
-                                    <segue destination="VgM-Fw-XvL" kind="presentation" id="6UN-lq-6mT"/>
+                                    <segue destination="VgM-Fw-XvL" kind="presentation" identifier="ToCViaNav" id="6UN-lq-6mT"/>
                                 </connections>
                             </button>
                         </subviews>

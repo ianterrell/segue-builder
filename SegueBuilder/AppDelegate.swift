@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.backgroundColor = .whiteColor()
-        window?.rootViewController = UINavigationController(rootViewController: A.build(dependency: "a"))
+        window?.rootViewController = UINavigationController(rootViewController: A.build(dependency: "injected from app delegate"))
         window?.makeKeyAndVisible()
         return true
     }
